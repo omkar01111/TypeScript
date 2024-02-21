@@ -37,3 +37,4 @@
 // const lol:FuncType=function lol(n){
 //     return n;
 // }
+
