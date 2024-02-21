@@ -9,11 +9,13 @@
 // surname=234;
 // surname="more";
 //!  function last after m number is return type
-const func = (n, m) => {
-    console.log(n, m);
-    return n * m;
-};
-const func2 = (n, m) => {
-    console.log(n, m);
-    return n * m;
-};
+// const func=(n:number,m:number):number=>{
+//     console.log(n,m);
+//     return n*m;
+// };
+// ! we can give argument type like this
+// type UserName=(n:number,m:number)=>number;
+// const func2 : UserName=(n,m)=>{
+//     console.log(n,m);
+//     return n*m;
+// };
