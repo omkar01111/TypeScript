@@ -44,17 +44,17 @@
 
 // !interFace 
 
-interface ProductType{
-    name:string;
-    price:number;
-    }
+// interface ProductType{
+//     name:string;
+//     price:number;
+//     }
 
-    class Product implements ProductType{
+//     class Product implements ProductType{
        
-        constructor(public name:string, public price:number){
+//         constructor(public name:string, public price:number){
             
         
-        }
-    }
+//         }
+//     }
 
-    const product1=new Product("laptop",20000);
+//     const product1=new Product("laptop",20000);
