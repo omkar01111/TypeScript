@@ -1,6 +1,6 @@
-// !function with objects
+// ! Function with Objects
 
-// ! Method 1
+// ! Method 1: Defining function with inline object type
 // const getData = (product: {
 //   name: string;
 //   stock: number;
@@ -10,45 +10,49 @@
 //   console.log(product);
 // };
 
-//! Method 2 (Recomended way)
-// type GetDataType=(product:{
+//! Method 2 (Recommended way): Using type and interface for better readability and reusability
+// Define type for function parameter
+// type GetDataType = (product: {
 //     name: string;
-//   stock: number;
-//   price: number;
-//   photo: string;
-// })=>void;
+//     stock: number;
+//     price: number;
+//     photo: string;
+// }) => void;
 
+// Define interface for product
 // interface Product {
-//   name: string;
-//   stock: number;
-//   price: number;
-//   photo: string;
-//  readonly id:number
+//     name: string;
+//     stock: number;
+//     price: number;
+//     photo: string;
+//     readonly id: number;
 // }
 
-// type GetDataType = (product: Product) => void;
-
+// Use defined type with interface for the function
 // const getData: GetDataType = (product) => {
-//   console.log(product);
+//     console.log(product);
 // };
 
-// const productOne :Product= {
-//   name: "MackBook",
-//   stock: 1,
-//   price: 1500000,
-//   photo: "https://apple.com",
-//   id:45789,
+// Create a product object
+// const productOne: Product = {
+//     name: "MacBook",
+//     stock: 1,
+//     price: 1500000,
+//     photo: "https://apple.com",
+//     id: 45789,
 // };
 
+// Call the function with the product object
 // getData(productOne);
 
-// ! Never Type
+// ! Never Type: Used for values that never occur
+// Define a type with specific values
+// type ThemeMode = "light" | "dark";
 
-// type themeMode="light"|"dark";
+// Assign a value with specific type
+// const mode: ThemeMode = "dark";
 
-// const mode:themeMode="dark";
-
-// const errorHandler=():never=>{
-//     throw new Error("Error Occured");
-
+// Function that never returns (throws an error)
+// const errorHandler = (): never => {
+//     throw new Error("Error Occurred");
 // }
