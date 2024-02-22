@@ -4,7 +4,7 @@
 
 // const btn = document.getElementById("btn") as HTMLElement; //!telling it is html element to ty
 // const btn = <HTMLElement> document.getElementById("btn");
-const btn = document.getElementById("btn")!;
+// const btn = document.getElementById("btn")!;
 
 // const img=document.getElementById("myimg")as HTMLImageElement;
 // img.src
@@ -23,20 +23,20 @@ const btn = document.getElementById("btn")!;
 //   body.append(h2);
 // };
 
-interface Person {
-  name: string;
-  email: string;
-}
+// interface Person {
+//   name: string;
+//   email: string;
+// }
 
-const myObj: Person = {
-  name: "omi",
-  email: "Omi@gmail.com",
-};
-console.log(myObj.name);
+// const myObj: Person = {
+//   name: "omi",
+//   email: "Omi@gmail.com",
+// };
+// console.log(myObj.name);
 
-let key="name";
+// let key="name";
 
-myObj[key as keyof typeof myObj];
+// myObj[key as keyof typeof myObj];
 
 // const getName = (): string => {
 //   return myObj["name"];
@@ -45,8 +45,8 @@ myObj[key as keyof typeof myObj];
 //   return myObj["email"];
 // };
 
-const getData = (key: keyof Person): string => {
-  return myObj[key];
-};
+// const getData = (key: keyof Person): string => {
+//   return myObj[key];
+// };
 
-getData("name");
+// getData("name");
