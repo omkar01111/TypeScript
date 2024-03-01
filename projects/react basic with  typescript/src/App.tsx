@@ -1,55 +1,44 @@
-import { FormEvent, useState } from "react";
-// import Box from "./components/Box";
+import { ReactNode, createContext, useState } from "react";
+import Box from "./components/Box";
 
-interface Person {
-  name: string;
-  age: number;
+// create one unione data type for theme
+type ThemeType = "light" | "dark";
+
+// Create interface for theme context type
+interface ThemeContextType {
+  theme: ThemeType;
+  toggleTheme: () => void;
 }
 
-function App() {
-  // const [val,setVal]= useState<string>("");
-  const [user, setUser] = useState<Person>({ name: "", age: 0 });
+// Created context it is like redux use for state management
+export const ThemeContext = createContext<ThemeContextType>({
+  theme: "light",
+  toggleTheme: () => {},
+});
 
-  const submitHandler=(e:FormEvent<HTMLFormElement>)=>{
-    e.preventDefault();
-    console.log(user);
-    
-  }
+// Created theme provider
+const ThemeProvider = ({ children }: { children: ReactNode }) => {
+  // useState for get and set vlaue of theme
+  const [theme, setTheme] = useState<ThemeType>("light");
+
+  // changing theme
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
   return (
-    <>
+    // created provider and passed theme and fuction
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+};
+// use context3.
+function App() {
+  return (
+    <ThemeProvider>
       <div>Hello</div>
-      {/* <Box
-        heading="Hello world"
-            // func1={(a: string) => {
-            //   alert(a);
-            // }}
-            // childern={<>lol</>}
-      >
-        {<button>Click Me</button>}
-      </Box> */}
-
-      {/* <Box  label="Search" value={val} setter={setVal}/> */}
-
-      <form onSubmit={(e)=>{submitHandler(e)}}>
-        <input
-          type="number"
-          value={user?.age|| ""}
-          onChange={(e) =>
-            setUser((prev) => ({ ...prev!, age: Number(e.target.value) }))
-          }
-          placeholder="Enter Your Age"
-        />
-        <input
-          type="text"
-          value={user?.name||""}
-          onChange={(e) =>
-            setUser((prev) => ({ ...prev!, name: e.target.value }))
-          }
-          placeholder="Enter Your Age"
-        />
-        <button type="submit">Submit</button>
-      </form>
-    </>
+      <Box />
+    </ThemeProvider>
   );
 }
 

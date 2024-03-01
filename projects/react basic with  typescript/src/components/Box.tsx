@@ -1,40 +1,16 @@
-import { Dispatch } from "react";
+import { ThemeContext } from "../App";
+import { useContext } from "react";
 
-// type PropsType={
-//     heading:string;
-//     count?:number;
-//     func1:(a:string)=>void;
-//     children: ReactNode;
-// }
-// while passing parameter you have to specify type
-//!type1:- const Box = ({ heading }: { heading: string }) => {
+const Box = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
-// ! type 2:-
-// const Box = ({heading,count=25 , children}:PropsType) => {
-type InputValType = string | number;
-// ! genric type
-const Box = <T extends InputValType>({
-  label,
-  value,
-  setter,
-}: {
-  label: string;
-  value: T;
-  setter: Dispatch <React.SetStateAction<T>>;
-}) => {
   return (
-    <div>
-      {/* <h1>{heading}</h1>
-      {
-        count && <p>{count}</p> //if exist then show
-      }
-      {/* <h5>{count} </h5> */}
-      {/* {children}  */}
-
-      <form action="">
-        <label htmlFor="">{label}</label>
-        <input type="text" name="" id="" value={value} onChange={(e)=>setter(e.target.value as T)} />
-      </form>
+    <div
+      className="boxContainer"
+      style={{ backgroundColor: theme === "dark" ? "rgb(40,40,40)" : "white" }}
+    >
+      <h1>Box 1</h1>
+      <button onClick={toggleTheme}>Change Theme</button>
     </div>
   );
 };
