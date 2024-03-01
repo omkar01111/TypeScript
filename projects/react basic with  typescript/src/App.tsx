@@ -1,44 +1,54 @@
-import { ReactNode, createContext, useState } from "react";
-import Box from "./components/Box";
+import { useReducer } from "react";
 
-// create one unione data type for theme
-type ThemeType = "light" | "dark";
-
-// Create interface for theme context type
-interface ThemeContextType {
-  theme: ThemeType;
-  toggleTheme: () => void;
-}
-
-// Created context it is like redux use for state management
-export const ThemeContext = createContext<ThemeContextType>({
-  theme: "light",
-  toggleTheme: () => {},
-});
-
-// Created theme provider
-const ThemeProvider = ({ children }: { children: ReactNode }) => {
-  // useState for get and set vlaue of theme
-  const [theme, setTheme] = useState<ThemeType>("light");
-
-  // changing theme
-  const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-  };
-  return (
-    // created provider and passed theme and fuction
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      {children}
-    </ThemeContext.Provider>
-  );
+type StateType = {
+  count: number;
 };
-// use context3.
+
+type ActionType =
+  | { type: "Increment"; payload: number }
+  | { type: "Decrement"; payload: number };
+
+// creating reducer
+const reducer = (state: StateType, action: ActionType): StateType => {
+  switch (action.type) {
+    case "Increment":
+      return { count: state.count + action.payload };
+
+    case "Decrement":
+      return { count: state.count - action.payload };
+
+    default:
+      return state;
+  }
+};
+
+const initialState: StateType = {
+  count: 0,
+};
+
 function App() {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  const increment = (): void => {
+    dispatch({
+      type: "Increment",
+      payload: 1,
+    });
+  };
+  const decrement = (): void => {
+    dispatch({
+      type: "Decrement",
+      payload: 1,
+    });
+  };
+
   return (
-    <ThemeProvider>
-      <div>Hello</div>
-      <Box />
-    </ThemeProvider>
+    <div>
+      <h1>Count Change</h1>
+      <p>Count : {state.count}</p>
+      <button onClick={increment}>+</button>
+      <button onClick={decrement}>-</button>
+    </div>
   );
 }
 
