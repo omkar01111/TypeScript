@@ -1,53 +1,38 @@
-import { useReducer } from "react";
-
-type StateType = {
-  count: number;
-};
-
-type ActionType =
-  | { type: "Increment"; payload: number }
-  | { type: "Decrement"; payload: number };
-
-// creating reducer
-const reducer = (state: StateType, action: ActionType): StateType => {
-  switch (action.type) {
-    case "Increment":
-      return { count: state.count + action.payload };
-
-    case "Decrement":
-      return { count: state.count - action.payload };
-
-    default:
-      return state;
-  }
-};
-
-const initialState: StateType = {
-  count: 0,
-};
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { StartType, decrement, increment, incrementByValue } from "./redux";
 
 function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [val, setVal] = useState<number>(0);
+  const dispatch = useDispatch();
 
-  const increment = (): void => {
-    dispatch({
-      type: "Increment",
-      payload: 1,
-    });
-  };
-  const decrement = (): void => {
-    dispatch({
-      type: "Decrement",
-      payload: 1,
-    });
+  const count = useSelector((state: StartType) => state.count);
+
+  const incrementHandler=()=>{
+    dispatch(increment());
+  }
+  const decrementHandler=()=>{
+    dispatch(decrement());
+  }
+  const incrementHandlerByVal = () => {
+    setVal(0);
+    dispatch(incrementByValue(val));
   };
 
   return (
     <div>
-      <h1>Count Change</h1>
-      <p>Count : {state.count}</p>
-      <button onClick={increment}>+</button>
-      <button onClick={decrement}>-</button>
+      <h1>ToolKit</h1>
+      <h2>Count = {count}</h2>
+      <button  onClick={decrementHandler} >-</button>
+      <button onClick={incrementHandler}>+</button>
+      <input
+        type="number"
+        value={val}
+        onChange={(e) => setVal(Number(e.target.value))}
+      />
+      <button disabled={val < 0} onClick={incrementHandlerByVal}>
+        ADD
+      </button>
     </div>
   );
 }
